@@ -1,1 +1,1 @@
-# zelty-reservation
+# restaurant-reservation
