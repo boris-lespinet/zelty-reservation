@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Réserver une table</title>
+  <style>
+    /* Page "vide", fond propre */
+    html, body { height: 100%; margin: 0; background:#fff; }
+    /* On cache le lien déclencheur (il existe juste pour Zelty) */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    /* Empêche le scroll derrière la popup si besoin */
+    body { overscroll-behavior: contain; }
+  </style>
+
+  <!-- Charge le loader Zelty -->
+  <script>
+  (function(){
+    window._zwgb = window._zwgb || {};
+    window._zwgb.key = 'MjExOtt/025Bhc4Mcg5UdlyDPaHNZ6Sf'; // ta clé
+    var z = document.createElement('script');
+    z.type = 'text/javascript';
+    z.src = 'https://booking.zelty.fr/loader.js';
+    document.head.appendChild(z);
+  })();
+  </script>
+</head>
+
+<body>
+  <!-- Bouton "fantôme" que Zelty écoute (classe .zbooking) -->
+  <a id="openZelty" class="zbooking visually-hidden" href="#">Ouvrir le module</a>
+
+  <script>
+    // Ouvre automatiquement le widget dès qu’il est prêt
+    (function autoOpen() {
+      var btn = document.getElementById('openZelty');
+      // On ré-essaie jusqu’à ce que le loader ait initialisé l’écouteur sur .zbooking
+      if (btn && typeof window._zwgb !== 'undefined') {
+        // Petit délai pour laisser Zelty finir son init
+        setTimeout(function(){ btn.click(); }, 300);
+      } else {
+        setTimeout(autoOpen, 200);
+      }
+    })();
+  </script>
+</body>
+</html>
